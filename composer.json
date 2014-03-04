@@ -4,6 +4,6 @@
 	"license": "OSL-3.0",
 	"require": {
 		"php": ">=5.3",
-		"jayalfredprufrock/codeigniter-boilerplate" : "*"
+		"jayalfredprufrock/codeigniter-boilerplate" : ">=0.5"
 	}
 }
