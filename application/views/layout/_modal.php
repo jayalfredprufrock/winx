@@ -1,13 +1,13 @@
-<div class="modal modal-<?= $type ?>" <?= $id ?: '' ?>>
+<div class="modal modal-<?= $type ?>" <?= $id ? 'id="'.$id.'"' : '' ?>>
 	
-	<? if ($type == 'form') echo form($form_action,'',$form_hidden); ?>
+	<?php if ($form_action !== FALSE) echo form($form_action,'',$form_hidden); ?>
 			    
 	    <div class="modal-header">
-		    <a href="<?= $close_btn_url ?>" class="btn close" data-dismiss="modal">&times;</a>
+		    <?= $close_button ?>
 		    <h3><?= $title ?></h3>
 	    </div>
 	    
-	<? if ($type == 'form') echo validation_errors(); ?>
+	<?php if ($form_action !== FALSE) echo validation_errors(); ?>
 	    
 	    <div class="modal-body">
 	    	<?= $body ?>
@@ -23,4 +23,4 @@
     
 </div>
 
-<div class="modal-backdrop fade in"></div>
+<div class="modal-backdrop"></div>

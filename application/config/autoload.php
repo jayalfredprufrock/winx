@@ -75,7 +75,7 @@ $autoload['packages'] = array();
 |
 */
 
-$autoload['sparks'] = array('codeigniter-debug-bar','codeigniter-language','cloudmanic-storage','cloudmanic-combine','CodeIgniter-Template-Library','codeigniter-messages');
+$autoload['sparks'] = array('codeigniter-debug-bar','codeigniter-language','cloudmanic-storage','cloudmanic-combine','codeigniter-template','codeigniter-messages');
 
 
 
@@ -103,7 +103,7 @@ $autoload['libraries'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('language','general');
+$autoload['helper'] = array('language','inflector','form','general','javascript','bootstrap');
 
 
 /*
@@ -149,6 +149,7 @@ $autoload['language'] = array('general');
 */
 
 $autoload['model'] = array();
+
 
 
 /* End of file autoload.php */

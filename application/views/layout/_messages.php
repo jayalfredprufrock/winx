@@ -1,4 +1,4 @@
-<? if ($messages) : 
+<?php if ($messages) : 
 		
 		foreach($messages as $msg) : ?>
 
@@ -6,12 +6,12 @@
 				
 				<button typoe="button" class="close" data-dismiss="alert">&times;</button>
 				
-				<? if ($msg->title) : ?><h4><?= $msg->title ?></h4><? endif; ?>
+				<?php if ($msg->title) : ?><h4><?= $msg->title ?></h4><?php endif; ?>
 				
 				<?= $msg->text ?>
 				
 			</div>
 
-<? 		endforeach;
+<?php 		endforeach;
 			
 endif; ?>

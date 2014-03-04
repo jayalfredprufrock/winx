@@ -23,7 +23,7 @@ class MY_Controller extends CI_Controller {
 		
 		
 		//is this a form submission?
-		if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+		if ($this->input->server('REQUEST_METHOD') === 'POST'){
 			
 			//only works if you include MY_Security.php in the core overrides
 			$this->_breaking_error(!empty($this->security->csrf_error), 'Your request token has expired. Please refresh your browser and try again.');	
@@ -31,17 +31,27 @@ class MY_Controller extends CI_Controller {
 			$this->load->library('form_validation');
 			
 			//validation fails	
-			if (!$this->form_validation->run($this->uri->slash_rsegment(1).$this->uri->rsegment(2))){
-				
+			if (!$this->form_validation->run($this->uri->slash_rsegment(1).$this->uri->rsegment(2)) && $this->form_validation->error_array()){
+					
+				$this->_form_error();	
+					
 				if ($this->input->is_ajax_request()){
 					
 					$this->_ajax_form_error();			
 				}
 						
 			}
-			else if($p){
+			else {
 				
-				return call_user_func_array($p, $params);
+				if (!$this->form_validation->error_array()){
+					
+					//$this->log->log_message('error','POST request without validation rules.', 'URI:'.$this->uri->uri_string());
+				}
+				
+				if($p){
+				
+					$this->_after_post($this->uri->uri_string(), call_user_func_array($p, $params));
+				}
 			}
 		}
 		
@@ -53,19 +63,32 @@ class MY_Controller extends CI_Controller {
 		
 		$this->_show_404();
 	}
-
+	
+	
+	protected function _form_error(){
+		
+		
+	}
+	
 	//Stub for adding ajax-specific behaviors
-	function _ajax_form_error(){
+	protected function _ajax_form_error(){
 		
 
 	}
 	
+	protected function _after_post($uri, $returned){
+		
+		
+	}
 	
-	function _page($view, $data = array(), $template = FALSE){
+	
+	protected function _page($view, $data = array(), $template = FALSE){
+			
+		$this->_load_page_lang($view);	
 		
-		$this->template->title = lang('page_title');
-		$this->template->description = lang('page_description');
-		
+			
+		$this->template->title->default((lang('page_title') ? lang('page_title') . ' | ' : '') . lang('site_title'));	
+		$this->template->description->default(lang('page_description') ?: lang('site_description'));
 		
 		$this->template->css = $this->combine->css_folder('',1,'style.css')
 											 ->css_folder('themes/'.$this->_theme,1,array('style.css','responsive.css'))
@@ -79,17 +102,23 @@ class MY_Controller extends CI_Controller {
 			$this->template->messages->view('layout/_messages', array('messages'=>$this->messages->get()));
 		}
 		
-		$this->template->breadcrumb->view('layout/_breadcrumb', array('breadcrumb'=>array(base_url()=>'Home','/signin'=>'Signin')));
-		
 		if ($view){
 			
 			$this->template->content->view($view, $data);	
 		}		
 		
-		$this->template->publish($template);	
+		$this->template->publish($template);
 	}
 	
-	function _show_404(){
+	protected function _load_page_lang($view){
+		
+		if (file_exists(APPPATH . 'language/' . $this->language->get(TRUE) . '/views/' . $view . '_lang.php')){
+			
+			$this->lang->load('views/'.$view);
+		}
+	}
+	
+	protected function _show_404(){
 			
 		//override this method and use
 		//show_404() to replicate native CI functionality		
@@ -98,11 +127,11 @@ class MY_Controller extends CI_Controller {
 	}
 	
 	
-	function _breaking_error($error, $message, $title = FALSE){
+	protected function _breaking_error($error, $message, $title = FALSE){
 		
 		if ($error){
 
-			$this->messages->error($message);
+			$this->messages->danger($message);
 		
 			$this->_page(FALSE);
 			

@@ -1,7 +1,7 @@
-<? if ($breadcrumb) : ?>
+<?php if ($breadcrumb) : ?>
 <ul class="breadcrumb">
 	
-	<?  $i=0;
+	<?php $i=0;
 	
 		foreach ($breadcrumb as $url=>$title) : 
 			
@@ -9,14 +9,14 @@
 	
 				<li class="active"><?= $title ?></li>
 				
-			<? else: ?>
+			<?php else: ?>
 			
 				<li><a href="<?= $url ?>"><?= $title ?></a> <span class="divider">/</span></li>
 
-			<? 	endif;
+			<?php 	endif;
 	
 		endforeach; ?>
 	
 </ul>
-<? endif; ?>
+<?php endif; ?>
 	

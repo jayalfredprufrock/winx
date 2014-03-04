@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require APPPATH.'/core/Winx_Controller.php';
 
-class Example extends MY_Controller {
+class Example extends Winx_Controller {
 
 	
 	public function index()
@@ -11,6 +12,9 @@ class Example extends MY_Controller {
 	
 	public function fluid()
 	{
+			
+		$this->messages->info('Welcome to Winx!');
+			
 		$this->_page('example/fluid', array(), 'layout/two_column');
 	}
 	
@@ -25,29 +29,31 @@ class Example extends MY_Controller {
 	public function carousel()
 	{
 		
-		$this->_page('example/carousel', array(),'layout/one_column');
+		$this->_page('example/carousel');
 	}
 	
 	public function modal()
 	{
 		
-		$this->template->content->widget('modal',array('title'=>'Modal Fun!', 'body'=>'Here is a wonderful modal'));
+		$this->template->modal->widget('modal',array('title'=>'Modal Fun!', 'body'=>'Here is a wonderful modal'));
 		
 		$this->_page(FALSE);
+	}
+	
+	public function modal2()
+	{
+		
+		$this->template->modal->widget('modal',array('title'=>'Modal2 Fun!', 'body'=>'Here is a wonderful modal'));
+		
+		$this->_page(FALSE);	
 	}
 	
 	public function hero()
 	{
 		
-		$this->_page('example/hero', array(), 'layout/one_column');
+		$this->_page('example/hero');
 	}
-	
-	public function sticky_footer_navbar()
-	{
-		
-		$this->_page('example/sticky-footer-navbar');
-	}
-	
+
 	
 }
 

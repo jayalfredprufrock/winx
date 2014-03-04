@@ -1,4 +1,0 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-# Load the library when the spark is loaded
-$autoload['libraries'] = array('session','messages');
