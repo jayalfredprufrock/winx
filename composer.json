@@ -8,10 +8,9 @@
 		"jayalfredprufrock/codeigniter-boilerplate" : "*",
 		"cartalyst/sentry": "~2.0"
 	},
-	"extra":{
-		
+	"extra":{		
 		"installer-paths":{
-			"./": [
+			".": [
 				"jayalfredprufrock/codeigniter-boilerplate"
 			]
 		}
