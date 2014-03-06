@@ -1,9 +1,10 @@
 {
 	"description" : "An ajax-powered app framework built on top of Codeigniter 3 and Bootstrap 3, installable via composer.",
 	"name" : "jayalfredprufrock/winx",
-	"license": "OSL-3.0",
+	"license": "MIT",
 	"require": {
-		"php": ">=5.3",
-		"jayalfredprufrock/codeigniter-boilerplate" : ">=0.5"
+		"php": ">=5.4",
+		"jayalfredprufrock/codeigniter-boilerplate" : "*",
+		"cartalyst/sentry": "~3.0"
 	}
 }
