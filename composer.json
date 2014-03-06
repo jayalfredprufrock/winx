@@ -11,7 +11,7 @@
 	"extra":{
 		
 		"installer-paths":{
-			".": [
+			"./": [
 				"jayalfredprufrock/codeigniter-boilerplate"
 			]
 		}
