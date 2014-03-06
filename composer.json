@@ -6,6 +6,6 @@
 	"require": {
 		"php": ">=5.4",
 		"jayalfredprufrock/codeigniter-boilerplate" : "*",
-		"cartalyst/sentry": "~3.0"
+		"cartalyst/sentry": "~2.0"
 	}
 }
